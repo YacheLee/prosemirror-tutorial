@@ -23,9 +23,7 @@ function RichTexdtEditor() {
     });
 
     return (
-        <div className="App">
-            <div ref={editor}/>
-        </div>
+        <div ref={editor}/>
     );
 }
 
