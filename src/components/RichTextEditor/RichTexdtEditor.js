@@ -12,7 +12,7 @@ function RichTexdtEditor() {
             schema,
             plugins: [
                 history(),
-                UndoPlugin
+                UndoPlugin,
             ]
         });
         new EditorView(editor.current, {state});
