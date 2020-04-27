@@ -4,6 +4,7 @@ import {EditorState} from "prosemirror-state";
 import {EditorView} from "prosemirror-view";
 import {history} from "prosemirror-history";
 import UndoPlugin from "./plugins/UndoPlugin";
+import RedoPlugin from "./plugins/RedoPlugin";
 
 function RichTexdtEditor() {
     const editor = useRef(null);
@@ -13,6 +14,7 @@ function RichTexdtEditor() {
             plugins: [
                 history(),
                 UndoPlugin,
+                RedoPlugin
             ]
         });
         new EditorView(editor.current, {state});
