@@ -1,1 +1,1 @@
-export {default} from './RichTexdtEditor';
+export {default} from './RichTextEditor';

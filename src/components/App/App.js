@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import RichTexdtEditor from "../RichTextEditor";
+import RichTextEditor from "../RichTextEditor";
 
 function App() {
     return (
         <div className="App">
-            <RichTexdtEditor />
+            <RichTextEditor />
         </div>
     );
 }

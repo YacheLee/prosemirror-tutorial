@@ -7,7 +7,7 @@ import UndoPlugin from "./plugins/UndoPlugin";
 import RedoPlugin from "./plugins/RedoPlugin";
 import BoldPlugin from "./plugins/BoldPlugin";
 
-function RichTexdtEditor() {
+function RichTextEditor() {
     const editor = useRef(null);
     useEffect(() => {
         const state = EditorState.create({
@@ -27,4 +27,4 @@ function RichTexdtEditor() {
     );
 }
 
-export default RichTexdtEditor;
+export default RichTextEditor;
