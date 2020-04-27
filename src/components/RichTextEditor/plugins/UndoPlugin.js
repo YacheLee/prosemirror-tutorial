@@ -1,4 +1,4 @@
-import {redo, undo} from "prosemirror-history";
+import {undo} from "prosemirror-history";
 import {keydownHandler} from "prosemirror-keymap";
 import {Plugin} from 'prosemirror-state';
 
@@ -28,8 +28,7 @@ const UndoPlugin = new Plugin({
     },
     props: {
         handleKeyDown: keydownHandler({
-            "Mod-z": undo,
-            "Mod-y": redo
+            "Mod-z": undo
         })
     },
     update(){
