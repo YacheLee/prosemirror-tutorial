@@ -3,7 +3,7 @@ import {schema} from "prosemirror-schema-basic";
 import {EditorState} from "prosemirror-state";
 import {EditorView} from "prosemirror-view";
 import {history} from "prosemirror-history";
-import UndoAndRedo from "./plugins/UndoAndRedo";
+import UndoPlugin from "./plugins/UndoPlugin";
 
 function RichTexdtEditor() {
     const editor = useRef(null);
@@ -12,10 +12,10 @@ function RichTexdtEditor() {
             schema,
             plugins: [
                 history(),
-                UndoAndRedo
+                UndoPlugin
             ]
         });
-        const view = new EditorView(editor.current, {state});
+        new EditorView(editor.current, {state});
     });
 
     return (
