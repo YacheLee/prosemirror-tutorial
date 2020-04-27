@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import {MdUndo} from 'react-icons/md';
 import {undo} from "prosemirror-history";
 import {keydownHandler} from "prosemirror-keymap";
 import {Plugin} from 'prosemirror-state';
@@ -5,17 +8,19 @@ import {Plugin} from 'prosemirror-state';
 class UndoView{
     constructor(editorView) {
         this.editorView = editorView;
-        this.dom = document.createElement('button');
-        this.dom.disabled = !undo(editorView.state);
-        this.dom.innerText = 'Undo';
-        this.dom.addEventListener('click', (e) => {
+        this.dom = document.createElement('span');
+        this.renderReactComponent(editorView);
+    }
+    renderReactComponent(editorView){
+        const disabled = !undo(this.editorView.state);
+        ReactDOM.render(<MdUndo style={{color: disabled ? "red" : "black"}} onClick={e=>{
             e.preventDefault();
             editorView.focus();
             undo(editorView.state, editorView.dispatch);
-        });
+        }} />, this.dom);
     }
-    update(){
-        this.dom.disabled = !undo(this.editorView.state);
+    update(editorView){
+        this.renderReactComponent(editorView);
     }
     destroy() { this.dom.remove() }
 }
