@@ -7,7 +7,7 @@ import {CompactPicker} from 'react-color';
 import mark from './mark';
 import {changeColor, getColor} from './commands';
 
-function TextColorPopover({value, onChange}){
+function TextColorPopover({editorView, value, onChange}){
     const [open, setOpen] = useState(false);
 
     return <Popover
@@ -16,7 +16,9 @@ function TextColorPopover({value, onChange}){
         onClickOutside={() => setOpen(false)}
         content={(<CompactPicker color={value} onChange={({hex}) => onChange(hex)} />)}
     >
-        <MdTextFormat type='color' onClick={() => {
+        <MdTextFormat type='color' onClick={(e) => {
+            e.preventDefault();
+            editorView.focus();
             setOpen(!open);
         }}/>
     </Popover>;
@@ -29,7 +31,7 @@ class ToolbarView{
     }
     renderReactComponent(editorView){
         const value = getColor(editorView);
-        ReactDOM.render(<TextColorPopover value={value} onChange={value=>{
+        ReactDOM.render(<TextColorPopover editorView={editorView} value={value} onChange={value=>{
             changeColor(editorView, value, editorView.state, editorView.dispatch);
         }} />, this.dom);
     }
