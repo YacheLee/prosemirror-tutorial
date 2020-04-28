@@ -5,7 +5,7 @@ import {toggleMark} from "prosemirror-commands";
 import {keydownHandler} from "prosemirror-keymap";
 import {isActive} from './utils';
 
-function MarkPlugin(Icon, markType, attr, hotkey){
+function MarkPlugin(Icon, mark, markType, attr, hotkey){
     function toggle(editorState, dispatch){
         toggleMark(editorState.schema.marks[markType], {[attr]: true})(editorState, dispatch);
     }
@@ -38,7 +38,8 @@ function MarkPlugin(Icon, markType, attr, hotkey){
         },
         update(){
             return true;
-        }
+        },
+        mark
     };
 
     if(!!hotkey){

@@ -13,55 +13,43 @@ import StrikeThroughPlugin from './plugins/StrikeThroughPlugin';
 function RichTextEditor() {
     const editor = useRef(null);
     useEffect(() => {
+        const plugins = [
+            history(),
+            UndoPlugin,
+            RedoPlugin,
+            BoldPlugin,
+            ItalicPlugin,
+            UnderlinePlugin,
+            StrikeThroughPlugin
+        ];
+
+        const nodes = {
+            doc: {
+                content: "paragraph+"
+            },
+            paragraph: {
+                content: "inline*",
+                group: "block",
+                parseDOM: [{tag: "p"}],
+                toDOM: function toDOM() {
+                    return ["p", 0]
+                }
+            },
+            text: {
+                group: "inline"
+            },
+        };
+        const marks = plugins.map(({spec}) => spec.mark).filter(e => !!e).reduce((prev, cur)=>{
+            prev = {...prev, ...cur};
+            return prev;
+        }, {});
+
         const state = EditorState.create({
             schema: new Schema({
-                nodes: {
-                    doc: {
-                        content: "paragraph+"
-                    },
-                    paragraph: {
-                        content: "inline*",
-                        group: "block",
-                        parseDOM: [{tag: "p"}],
-                        toDOM: function toDOM() { return ["p", 0] }
-                    },
-                    text: {
-                        group: "inline"
-                    },
-                },
-                marks: {
-                    strong: {
-                        parseDOM: [{tag: "strong"},
-                            // This works around a Google Docs misbehavior where
-                            // pasted content will be inexplicably wrapped in `<b>`
-                            // tags with a font-weight normal.
-                            {tag: "b", getAttrs: function (node) { return node.style.fontWeight !== "normal" && null; }},
-                            {style: "font-weight", getAttrs: function (value) { return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null; }}],
-                        toDOM: function toDOM() { return ["b", 0] }
-                    },
-                    em: {
-                        parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
-                        toDOM: function toDOM() { return ["em", 0] }
-                    },
-                    u: {
-                        parseDOM: [{ tag: 'u' }],
-                        toDOM: () => ['u', 0]
-                    },
-                    del: {
-                        parseDOM: [{ tag: 'del' }],
-                        toDOM: () => ['del', 0]
-                    },
-                }
+                nodes,
+                marks
             }),
-            plugins: [
-                history(),
-                UndoPlugin,
-                RedoPlugin,
-                BoldPlugin,
-                ItalicPlugin,
-                UnderlinePlugin,
-                StrikeThroughPlugin
-            ]
+            plugins
         });
         new EditorView(editor.current, {state});
     });
