@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
 import {MdTextFormat} from 'react-icons/md';
 import Popover from 'react-tiny-popover';
-import {SketchPicker} from 'react-color';
+import {CompactPicker} from 'react-color';
 import mark from './mark';
 import {changeColor, getColor} from './commands';
 
@@ -14,7 +14,7 @@ function TextColorPopover({value, onChange}){
         isOpen={open}
         position={'top'}
         onClickOutside={() => setOpen(false)}
-        content={(<SketchPicker color={value} onChange={({hex}) => onChange(hex)} />)}
+        content={(<CompactPicker color={value} onChange={({hex}) => onChange(hex)} />)}
     >
         <MdTextFormat type='color' onClick={() => {
             setOpen(!open);
