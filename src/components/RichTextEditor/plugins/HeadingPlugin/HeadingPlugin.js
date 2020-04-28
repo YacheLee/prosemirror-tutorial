@@ -75,15 +75,17 @@ class ToolbarView{
     destroy() { this.dom.remove() }
 }
 
-const pluginConfig = {
-    view(editorView){
-        const view = new ToolbarView(editorView);
-        editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
-        return view;
-    },
-    update(){
-        return true;
-    }
-};
+function HeadingPlugin(toolbarDom){
+    return new Plugin({
+        view(editorView){
+            const view = new ToolbarView(editorView);
+            toolbarDom.append(view.dom);
+            return view;
+        },
+        update(){
+            return true;
+        }
+    });
+}
 
-export default new Plugin(pluginConfig);
+export default HeadingPlugin;

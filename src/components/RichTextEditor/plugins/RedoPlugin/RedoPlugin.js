@@ -5,40 +5,47 @@ import {redo} from "prosemirror-history";
 import {keydownHandler} from "prosemirror-keymap";
 import {Plugin} from 'prosemirror-state';
 
-class RedoView{
+class RedoView {
     constructor(editorView) {
         this.editorView = editorView;
         this.dom = document.createElement('span');
         this.renderReactComponent(editorView);
     }
-    renderReactComponent(editorView){
+
+    renderReactComponent(editorView) {
         const disabled = !redo(this.editorView.state);
-        ReactDOM.render(<MdRedo style={{color: disabled ? "red" : "black"}} onClick={e=>{
+        ReactDOM.render(<MdRedo style={{color: disabled ? "red" : "black"}} onClick={e => {
             e.preventDefault();
             editorView.focus();
             redo(editorView.state, editorView.dispatch);
-        }} />, this.dom);
+        }}/>, this.dom);
     }
-    update(editorView){
+
+    update(editorView) {
         this.renderReactComponent(editorView);
     }
-    destroy() { this.dom.remove() }
+
+    destroy() {
+        this.dom.remove()
+    }
 }
 
-const RedoPlugin = new Plugin({
-    view(editorView){
-        const view = new RedoView(editorView);
-        editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
-        return view;
-    },
-    props: {
-        handleKeyDown: keydownHandler({
-            "Mod-y": redo
-        })
-    },
-    update(){
-        return true;
-    }
-});
+function RedoPlugin(toolbarDom) {
+    return new Plugin({
+        view(editorView) {
+            const view = new RedoView(editorView);
+            toolbarDom.append(view.dom);
+            return view;
+        },
+        props: {
+            handleKeyDown: keydownHandler({
+                "Mod-y": redo
+            })
+        },
+        update() {
+            return true;
+        }
+    });
+}
 
 export default RedoPlugin;

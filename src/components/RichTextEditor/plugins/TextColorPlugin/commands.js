@@ -1,5 +1,7 @@
 import {toggleMark} from 'prosemirror-commands';
 
+const DEFAULT_COLOR = "black";
+
 export function getColor(editorView) {
     const state = editorView.state;
     const { $from, $to, $cursor } = state.selection;
@@ -34,9 +36,9 @@ export function getColor(editorView) {
         marksWithColor.length > 1 ||
         (marksWithColor.length === 1 && marks.length > 1)
     ) {
-        return null;
+        return DEFAULT_COLOR;
     }
-    return marksWithColor.length ? marksWithColor[0].attrs.color : 'black';
+    return marksWithColor.length ? marksWithColor[0].attrs.color : DEFAULT_COLOR;
 }
 
 function removeColor() {

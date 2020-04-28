@@ -25,20 +25,22 @@ class UndoView{
     destroy() { this.dom.remove() }
 }
 
-const UndoPlugin = new Plugin({
-    view(editorView){
-        const view = new UndoView(editorView);
-        editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
-        return view;
-    },
-    props: {
-        handleKeyDown: keydownHandler({
-            "Mod-z": undo
-        })
-    },
-    update(){
-        return true;
-    }
-});
+function UndoPlugin(toolbarDom){
+    return new Plugin({
+        view(editorView){
+            const view = new UndoView(editorView);
+            toolbarDom.append(view.dom);
+            return view;
+        },
+        props: {
+            handleKeyDown: keydownHandler({
+                "Mod-z": undo
+            })
+        },
+        update(){
+            return true;
+        }
+    });
+}
 
 export default UndoPlugin;

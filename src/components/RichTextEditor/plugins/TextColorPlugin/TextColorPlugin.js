@@ -12,11 +12,12 @@ function TextColorPopover({editorView, value, onChange}){
 
     return <Popover
         isOpen={open}
-        position={'top'}
+        position={'bottom'}
         onClickOutside={() => setOpen(false)}
         content={(<CompactPicker color={value} onChange={({hex}) => {
             if(hex){
                 onChange(hex);
+                setOpen(false);
             }
         }} />)}
     >
@@ -45,18 +46,20 @@ class ToolbarView{
     destroy() { this.dom.remove() }
 }
 
-const pluginConfig = {
-    view(editorView){
-        const view = new ToolbarView(editorView);
-        editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
-        return view;
-    },
-    update(){
-        return true;
-    },
-    mark
-};
+function TextColorPlugin(toolbarDom){
+    const pluginConfig = {
+        view(editorView){
+            const view = new ToolbarView(editorView);
+            toolbarDom.append(view.dom);
+            return view;
+        },
+        update(){
+            return true;
+        },
+        mark
+    };
 
-const TextColorPlugin = new Plugin(pluginConfig);
+    return new Plugin(pluginConfig);
+}
 
 export default TextColorPlugin;

@@ -12,19 +12,21 @@ import StrikeThroughPlugin from './StrikeThroughPlugin';
 import HeadingPlugin from './HeadingPlugin';
 import TextColorPlugin from './TextColorPlugin';
 
-const plugins = [
-    history(),
-    keymap(baseKeymap),
-    dropCursor(),
-    gapCursor(),
-    UndoPlugin,
-    RedoPlugin,
-    HeadingPlugin,
-    BoldPlugin,
-    ItalicPlugin,
-    UnderlinePlugin,
-    StrikeThroughPlugin,
-    TextColorPlugin
-];
+function plugins(toolbarDom){
+    return [
+        history(),
+        keymap(baseKeymap),
+        dropCursor(),
+        gapCursor(),
+        UndoPlugin(toolbarDom),
+        RedoPlugin(toolbarDom),
+        HeadingPlugin(toolbarDom),
+        BoldPlugin(toolbarDom),
+        ItalicPlugin(toolbarDom),
+        UnderlinePlugin(toolbarDom),
+        StrikeThroughPlugin(toolbarDom),
+        TextColorPlugin(toolbarDom)
+    ];
+}
 
 export default plugins;
