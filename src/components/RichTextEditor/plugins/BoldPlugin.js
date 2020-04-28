@@ -23,6 +23,24 @@ function toggleBold(editorState, dispatch){
     toggleMark(editorState.schema.marks.strong, {strong: true})(editorState, dispatch);
 }
 
+const BoldPlugin = new Plugin({
+    view(editorView){
+        const view = new BoldView(editorView);
+        editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
+        return view;
+    },
+    props: {
+        handleKeyDown: keydownHandler({
+            "Mod-b": (editorState, dispatch)=>{
+                toggleBold(editorState, dispatch);
+            }
+        })
+    },
+    update(){
+        return true;
+    }
+});
+
 class BoldView{
     constructor(editorView) {
         this.editorView = editorView;
@@ -45,23 +63,5 @@ class BoldView{
     }
     destroy() { this.dom.remove() }
 }
-
-const BoldPlugin = new Plugin({
-    view(editorView){
-        const view = new BoldView(editorView);
-        editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
-        return view;
-    },
-    props: {
-        handleKeyDown: keydownHandler({
-            "Mod-b": (editorState, dispatch)=>{
-                toggleBold(editorState, dispatch);
-            }
-        })
-    },
-    update(){
-        return true;
-    }
-});
 
 export default BoldPlugin;
