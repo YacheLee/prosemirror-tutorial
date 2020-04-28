@@ -3,23 +3,23 @@ import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
 import {MdTextFormat} from 'react-icons/md';
 import Popover from 'react-tiny-popover';
-import {CompactPicker} from 'react-color';
+import {SketchPicker} from 'react-color';
 import mark from './mark';
-import {changeColor} from './commands';
+import {changeColor, getColor} from './commands';
 
-function TextColorPopover({onChange}){
+function TextColorPopover({value, onChange}){
     const [open, setOpen] = useState(false);
 
     return <Popover
         isOpen={open}
         position={'top'}
         onClickOutside={() => setOpen(false)}
-        content={( <CompactPicker onChangeComplete={({ hex }) => onChange(hex)} /> )}
+        content={(<SketchPicker color={value} onChange={({hex}) => onChange(hex)} />)}
     >
-        <MdTextFormat type='color' onClick={()=>{
+        <MdTextFormat type='color' onClick={() => {
             setOpen(!open);
-        }} />
-    </Popover>
+        }}/>
+    </Popover>;
 }
 
 class ToolbarView{
@@ -28,7 +28,8 @@ class ToolbarView{
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
-        ReactDOM.render(<TextColorPopover onChange={value=>{
+        const value = getColor(editorView);
+        ReactDOM.render(<TextColorPopover value={value} onChange={value=>{
             changeColor(editorView, value, editorView.state, editorView.dispatch);
         }} />, this.dom);
     }
