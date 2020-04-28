@@ -1,13 +1,13 @@
-function markActive(state, type) {
+function markActive(state, mark) {
     const {selection} = state;
     const {from, $from, to, empty} = selection;
     if (empty) {
-        return type.isInSet(state.storedMarks || $from.marks());
+        return mark.isInSet(state.storedMarks || $from.marks());
     } else {
-        return state.doc.rangeHasMark(from, to, type);
+        return state.doc.rangeHasMark(from, to, mark);
     }
 }
 
-export function isActive(editorState, type) {
-    return !!markActive(editorState, type);
+export function isActive(editorState, mark) {
+    return !!markActive(editorState, mark);
 }
