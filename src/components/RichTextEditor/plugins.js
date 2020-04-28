@@ -8,6 +8,7 @@ import ItalicPlugin from './plugins/ItalicPlugin';
 import UnderlinePlugin from './plugins/UnderlinePlugin';
 import StrikeThroughPlugin from './plugins/StrikeThroughPlugin';
 import HeadingPlugin from './plugins/HeadingPlugin';
+import TextColorPlugin from './plugins/TextColorPlugin';
 
 const plugins = [
     history(),
@@ -18,7 +19,8 @@ const plugins = [
     BoldPlugin,
     ItalicPlugin,
     UnderlinePlugin,
-    StrikeThroughPlugin
+    StrikeThroughPlugin,
+    TextColorPlugin
 ];
 
 export default plugins;
