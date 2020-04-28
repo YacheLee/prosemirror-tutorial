@@ -1,4 +1,6 @@
 import {history} from "prosemirror-history";
+import {keymap} from 'prosemirror-keymap';
+import {baseKeymap} from 'prosemirror-commands';
 import UndoPlugin from "./plugins/UndoPlugin";
 import RedoPlugin from "./plugins/RedoPlugin";
 import BoldPlugin from "./plugins/BoldPlugin";
@@ -9,6 +11,7 @@ import HeadingPlugin from './plugins/HeadingPlugin';
 
 const plugins = [
     history(),
+    keymap(baseKeymap),
     UndoPlugin,
     RedoPlugin,
     HeadingPlugin,
