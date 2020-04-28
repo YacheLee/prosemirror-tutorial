@@ -7,6 +7,7 @@ import UndoPlugin from "./plugins/UndoPlugin";
 import RedoPlugin from "./plugins/RedoPlugin";
 import BoldPlugin from "./plugins/BoldPlugin";
 import ItalicPlugin from './plugins/ItalicPlugin';
+import UnderlinePlugin from './plugins/UnderlinePlugin';
 
 function RichTextEditor() {
     const editor = useRef(null);
@@ -40,7 +41,11 @@ function RichTextEditor() {
                     em: {
                         parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
                         toDOM: function toDOM() { return ["em", 0] }
-                    }
+                    },
+                    u: {
+                        parseDOM: [{ tag: 'u' }],
+                        toDOM: () => ['u', 0]
+                    },
                 }
             }),
             plugins: [
@@ -48,7 +53,8 @@ function RichTextEditor() {
                 UndoPlugin,
                 RedoPlugin,
                 BoldPlugin,
-                ItalicPlugin
+                ItalicPlugin,
+                UnderlinePlugin
             ]
         });
         new EditorView(editor.current, {state});
