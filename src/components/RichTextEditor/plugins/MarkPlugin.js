@@ -30,21 +30,26 @@ function MarkPlugin(Icon, markType, attr, hotkey){
         destroy() { this.dom.remove() }
     }
 
-    return new Plugin({
+    const pluginConfig = {
         view(editorView){
             const view = new GoView(editorView);
             editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
             return view;
         },
-        props: {
-            handleKeyDown: keydownHandler({
-                [hotkey] : toggle
-            })
-        },
         update(){
             return true;
         }
-    });
+    };
+
+    if(!!hotkey){
+        pluginConfig.props = {
+            handleKeyDown: keydownHandler({
+                [hotkey]: toggle
+            })
+        };
+    }
+
+    return new Plugin(pluginConfig);
 }
 
 export default MarkPlugin;

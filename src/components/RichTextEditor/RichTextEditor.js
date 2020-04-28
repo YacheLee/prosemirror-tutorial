@@ -8,6 +8,7 @@ import RedoPlugin from "./plugins/RedoPlugin";
 import BoldPlugin from "./plugins/BoldPlugin";
 import ItalicPlugin from './plugins/ItalicPlugin';
 import UnderlinePlugin from './plugins/UnderlinePlugin';
+import StrikeThroughPlugin from './plugins/StrikeThroughPlugin';
 
 function RichTextEditor() {
     const editor = useRef(null);
@@ -46,6 +47,10 @@ function RichTextEditor() {
                         parseDOM: [{ tag: 'u' }],
                         toDOM: () => ['u', 0]
                     },
+                    del: {
+                        parseDOM: [{ tag: 'del' }],
+                        toDOM: () => ['del', 0]
+                    },
                 }
             }),
             plugins: [
@@ -54,7 +59,8 @@ function RichTextEditor() {
                 RedoPlugin,
                 BoldPlugin,
                 ItalicPlugin,
-                UnderlinePlugin
+                UnderlinePlugin,
+                StrikeThroughPlugin
             ]
         });
         new EditorView(editor.current, {state});
