@@ -1,6 +1,3 @@
-import {MdFormatItalic} from 'react-icons/md';
-import MarkPlugin from './MarkPlugin';
-
 const mark =  {
     em: {
         parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
@@ -8,4 +5,4 @@ const mark =  {
     }
 };
 
-export default MarkPlugin(MdFormatItalic, mark, 'em', 'em', 'Mod-i');
+export default mark;

@@ -1,6 +1,3 @@
-import {MdFormatBold} from 'react-icons/md';
-import MarkPlugin from './MarkPlugin';
-
 const mark = {
     strong: {
         parseDOM: [
@@ -12,4 +9,4 @@ const mark = {
     },
 };
 
-export default MarkPlugin(MdFormatBold, mark, 'strong', 'strong', 'Mod-b');
+export default mark;
