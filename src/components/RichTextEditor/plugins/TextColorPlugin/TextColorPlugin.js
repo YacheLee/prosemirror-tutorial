@@ -14,7 +14,11 @@ function TextColorPopover({editorView, value, onChange}){
         isOpen={open}
         position={'top'}
         onClickOutside={() => setOpen(false)}
-        content={(<CompactPicker color={value} onChange={({hex}) => onChange(hex)} />)}
+        content={(<CompactPicker color={value} onChange={({hex}) => {
+            if(hex){
+                onChange(hex);
+            }
+        }} />)}
     >
         <MdTextFormat type='color' onClick={(e) => {
             e.preventDefault();
