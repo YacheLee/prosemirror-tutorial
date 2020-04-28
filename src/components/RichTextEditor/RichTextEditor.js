@@ -6,6 +6,7 @@ import {history} from "prosemirror-history";
 import UndoPlugin from "./plugins/UndoPlugin";
 import RedoPlugin from "./plugins/RedoPlugin";
 import BoldPlugin from "./plugins/BoldPlugin";
+import ItalicPlugin from './plugins/ItalicPlugin';
 
 function RichTextEditor() {
     const editor = useRef(null);
@@ -35,6 +36,10 @@ function RichTextEditor() {
                             {tag: "b", getAttrs: function (node) { return node.style.fontWeight !== "normal" && null; }},
                             {style: "font-weight", getAttrs: function (value) { return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null; }}],
                         toDOM: function toDOM() { return ["b", 0] }
+                    },
+                    italic: {
+                        parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
+                        toDOM: function toDOM() { return ["em", 0] }
                     }
                 }
             }),
@@ -42,7 +47,8 @@ function RichTextEditor() {
                 history(),
                 UndoPlugin,
                 RedoPlugin,
-                BoldPlugin
+                BoldPlugin,
+                ItalicPlugin
             ]
         });
         new EditorView(editor.current, {state});

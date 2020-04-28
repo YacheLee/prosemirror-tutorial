@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {MdFormatBold} from 'react-icons/md';
+import {MdFormatItalic} from 'react-icons/md';
 import {Plugin} from 'prosemirror-state';
 import {toggleMark} from "prosemirror-commands";
 import {keydownHandler} from "prosemirror-keymap";
 import {isActive} from './utils';
 
-function toggleBold(editorState, dispatch){
-    toggleMark(editorState.schema.marks.strong, {strong: true})(editorState, dispatch);
+function toggle(editorState, dispatch){
+    toggleMark(editorState.schema.marks.italic, {italic: true})(editorState, dispatch);
 }
 
-const BoldPlugin = new Plugin({
+const ItalicPlugin = new Plugin({
     view(editorView){
         const view = new BoldView(editorView);
         editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
@@ -18,8 +18,8 @@ const BoldPlugin = new Plugin({
     },
     props: {
         handleKeyDown: keydownHandler({
-            "Mod-b": (editorState, dispatch)=>{
-                toggleBold(editorState, dispatch);
+            "Mod-i": (editorState, dispatch)=>{
+                toggle(editorState, dispatch);
             }
         })
     },
@@ -30,19 +30,17 @@ const BoldPlugin = new Plugin({
 
 class BoldView{
     constructor(editorView) {
-        this.editorView = editorView;
         this.dom = document.createElement('span');
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
-        const markType = editorView.state.schema.marks.strong;
+        const markType = editorView.state.schema.marks.italic;
+        const isUsing = isActive(editorView.state, markType);
 
-        const isBolding = isActive(editorView.state, markType);
-
-        ReactDOM.render(<MdFormatBold style={{color: isBolding ? "blue" : "black"}} onClick={e=>{
+        ReactDOM.render(<MdFormatItalic style={{color: isUsing ? "blue" : "black"}} onClick={e=>{
             e.preventDefault();
             editorView.focus();
-            toggleBold(editorView.state, editorView.dispatch);
+            toggle(editorView.state, editorView.dispatch);
         }} />, this.dom);
     }
     update(editorView){
@@ -51,4 +49,4 @@ class BoldView{
     destroy() { this.dom.remove() }
 }
 
-export default BoldPlugin;
+export default ItalicPlugin;
