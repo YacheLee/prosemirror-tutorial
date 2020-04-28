@@ -5,11 +5,13 @@ import BoldPlugin from "./plugins/BoldPlugin";
 import ItalicPlugin from './plugins/ItalicPlugin';
 import UnderlinePlugin from './plugins/UnderlinePlugin';
 import StrikeThroughPlugin from './plugins/StrikeThroughPlugin';
+import HeadingPlugin from './plugins/HeadingPlugin';
 
 const plugins = [
     history(),
     UndoPlugin,
     RedoPlugin,
+    HeadingPlugin,
     BoldPlugin,
     ItalicPlugin,
     UnderlinePlugin,
