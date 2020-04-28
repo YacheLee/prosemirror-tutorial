@@ -10,7 +10,7 @@ function MarkPlugin(Icon, mark, markType, attr, hotkey){
         toggleMark(editorState.schema.marks[markType], {[attr]: true})(editorState, dispatch);
     }
 
-    class GoView{
+    class ToolbarView{
         constructor(editorView) {
             this.dom = document.createElement('span');
             this.renderReactComponent(editorView);
@@ -32,7 +32,7 @@ function MarkPlugin(Icon, mark, markType, attr, hotkey){
 
     const pluginConfig = {
         view(editorView){
-            const view = new GoView(editorView);
+            const view = new ToolbarView(editorView);
             editorView.dom.parentNode.insertBefore(view.dom, editorView.dom);
             return view;
         },
