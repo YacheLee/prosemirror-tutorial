@@ -37,7 +37,7 @@ function RichTextEditor() {
                             {style: "font-weight", getAttrs: function (value) { return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null; }}],
                         toDOM: function toDOM() { return ["b", 0] }
                     },
-                    italic: {
+                    em: {
                         parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
                         toDOM: function toDOM() { return ["em", 0] }
                     }
