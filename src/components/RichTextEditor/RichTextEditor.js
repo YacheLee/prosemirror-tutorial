@@ -5,6 +5,7 @@ import {EditorView} from "prosemirror-view";
 import plugins from "./plugins";
 import nodes from "./nodes";
 import marks from "./marks";
+import './editor.css';
 
 function RichTextEditor() {
     const editor = useRef(null);
