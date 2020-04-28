@@ -38,9 +38,7 @@ function MarkPlugin(Icon, markType, attr, hotkey){
         },
         props: {
             handleKeyDown: keydownHandler({
-                [hotkey] : (editorState, dispatch)=>{
-                    toggle(editorState, dispatch);
-                }
+                [hotkey] : toggle
             })
         },
         update(){
