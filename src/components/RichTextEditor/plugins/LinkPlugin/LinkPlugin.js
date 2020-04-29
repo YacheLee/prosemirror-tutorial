@@ -17,7 +17,9 @@ function LinkPlugin(){
                     const hyperlinkElement = target.closest(`.${className}`);
                     if(hyperlinkElement){
                         const mark = getActiveLinkMark(editorView.state);
-                        onLinkClick(editorView, hyperlinkElement, mark);
+                        if(mark){
+                            onLinkClick(editorView, hyperlinkElement, mark);
+                        }
                     }
                 }
             }
