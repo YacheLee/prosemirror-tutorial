@@ -1,10 +1,11 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Schema} from 'prosemirror-model';
 import styled from 'styled-components';
 import {EditorState} from "prosemirror-state";
 import {EditorView} from "prosemirror-view";
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import Popover from '@material-ui/core/Popover';
 import plugins from "./plugins";
 import nodes from "./nodes";
 import marks from "./marks";
@@ -24,31 +25,69 @@ const Toolbar = styled.div`
   flex-shrink: 0;
 `;
 
-function RichTextEditor({value}) {
+export let setPopoverAnchorElement = null;
+export let setPopoverContent = null;
+
+function RichTextEditor({id, value}) {
     const editor = useRef(null);
     const toolbar = useRef(null);
+    const [anchorEl, _setAnchorEl] = useState(null);
+    const [editorView, setEditorView] = useState(null);
+    const [popoverContent, _setPopoverContent] = useState(null);
+    setPopoverAnchorElement = _setAnchorEl;
+    setPopoverContent = _setPopoverContent;
+    const open = Boolean(anchorEl);
 
-    useEffect(() => {
-        const _plugins = plugins(toolbar.current);
-        const schema = new Schema({ nodes, marks: marks(_plugins) });
-
-        const state = EditorState.create({
-            doc: schema.nodeFromJSON({
+    const init = useCallback(()=>{
+        if(!editorView){
+            const _plugins = plugins(toolbar.current);
+            const schema = new Schema({ nodes, marks: marks(_plugins) });
+            const doc = schema.nodeFromJSON({
                 type: 'doc',
                 content: value
-            }),
-            plugins: _plugins
-        });
-        new EditorView(editor.current, {state});
-    });
+            });
+            const state = EditorState.create({
+                doc,
+                plugins: _plugins
+            });
+            setEditorView(new EditorView(editor.current, {state}));
+        }
+    }, [value, editorView]);
+
+    useEffect(() => {
+        init();
+    }, [init]);
 
     return (
         <Paper style={{margin: 12}}>
             <Toolbar ref={toolbar} />
             <Divider light />
             <div ref={editor} />
+            {editorView && <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={() => {
+                    _setAnchorEl(null);
+                    editorView.focus();
+                }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left'
+                }}
+            >
+                {popoverContent}
+            </Popover>}
         </Paper>
     );
 }
+
+RichTextEditor.propTypes = {
+
+};
 
 export default RichTextEditor;
