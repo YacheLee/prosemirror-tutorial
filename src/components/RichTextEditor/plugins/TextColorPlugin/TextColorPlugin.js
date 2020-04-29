@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {Fragment} from "react";
 import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
-import Popover from 'react-tiny-popover';
+import Popover from '@material-ui/core/Popover';
 import {CompactPicker} from 'react-color';
 import mark from './mark';
 import {changeColor, getColor} from './commands';
@@ -9,26 +9,39 @@ import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 import AButton from './AButton';
 
 function TextColorPopover({editorView, value, onChange}){
-    const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const id = open ? 'text-color-popover' : undefined;
 
-    return <Popover
-        containerStyle={{zIndex: 1}}
-        isOpen={open}
-        position={'bottom'}
-        onClickOutside={() => setOpen(false)}
-        content={(<CompactPicker color={value} onChange={({hex}) => {
-            if(hex){
-                onChange(hex);
-                setOpen(false);
-            }
-        }} />)}
-    >
+    return <Fragment>
+        <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={() => {
+                setAnchorEl(null);
+            }}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+            }}>
+            <CompactPicker color={value} onChange={({hex}) => {
+                if(hex){
+                    onChange(hex);
+                    setAnchorEl(null);
+                }
+            }} />
+        </Popover>
         <AButton color={value} onClick={(e) => {
             e.preventDefault();
             editorView.focus();
-            setOpen(!open);
+            setAnchorEl(e.currentTarget);
         }}/>
-    </Popover>;
+    </Fragment>
 }
 
 class ToolbarView{
