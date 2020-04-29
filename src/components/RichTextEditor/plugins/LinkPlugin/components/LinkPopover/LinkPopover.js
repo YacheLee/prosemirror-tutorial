@@ -62,7 +62,7 @@ function LinkPopover({url, onCopyLink, onEditLink, onRemoveLink}){
     return <Paper>
         <span className='global'><AiOutlineGlobal /></span>
         <Tooltip title={url}>
-            <a target="_blank" rel="noopener noreferrer" href={url} title={url}>{url}</a>
+            <a target="_blank" rel="noopener noreferrer" href={url}>{url}</a>
         </Tooltip>
         <span className='tools'>
             <Tooltip title="Copy link" onClick={onCopyLink}>
