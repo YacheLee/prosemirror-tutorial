@@ -12,6 +12,7 @@ function TextColorPopover({editorView, value, onChange}){
     const [open, setOpen] = useState(false);
 
     return <Popover
+        containerStyle={{zIndex: 1}}
         isOpen={open}
         position={'bottom'}
         onClickOutside={() => setOpen(false)}

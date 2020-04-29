@@ -9,6 +9,7 @@ import BoldPlugin from "./BoldPlugin";
 import ItalicPlugin from './ItalicPlugin';
 import UnderlinePlugin from './UnderlinePlugin';
 import StrikeThroughPlugin from './StrikeThroughPlugin';
+import TextColorPlugin from './TextColorPlugin';
 
 function plugins(toolbarDom){
     return [
@@ -23,7 +24,7 @@ function plugins(toolbarDom){
         ItalicPlugin(toolbarDom),
         UnderlinePlugin(toolbarDom),
         StrikeThroughPlugin(toolbarDom),
-        // TextColorPlugin(toolbarDom)
+        TextColorPlugin(toolbarDom)
     ];
 }
 
