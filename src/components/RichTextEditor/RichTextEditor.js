@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import {EditorState} from "prosemirror-state";
 import {EditorView} from "prosemirror-view";
 import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 import plugins from "./plugins";
 import nodes from "./nodes";
 import marks from "./marks";
 import './editor.css';
-import Divider from '@material-ui/core/Divider';
 
 const Toolbar = styled.div`
   padding: 4px 8px 4px 14px;
@@ -24,14 +24,19 @@ const Toolbar = styled.div`
   flex-shrink: 0;
 `;
 
-function RichTextEditor() {
+function RichTextEditor({value}) {
     const editor = useRef(null);
     const toolbar = useRef(null);
 
     useEffect(() => {
         const _plugins = plugins(toolbar.current);
+        const schema = new Schema({ nodes, marks: marks(_plugins) });
+
         const state = EditorState.create({
-            schema: new Schema({ nodes, marks: marks(_plugins) }),
+            doc: schema.nodeFromJSON({
+                type: 'doc',
+                content: value
+            }),
             plugins: _plugins
         });
         new EditorView(editor.current, {state});
