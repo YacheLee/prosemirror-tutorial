@@ -35,6 +35,7 @@ const Paper = styled(_Paper)`
   }
   
   .tools {
+    user-select: none;
     width: 90px;
     height: 30px;
     display: flex;
@@ -50,6 +51,7 @@ const Paper = styled(_Paper)`
       
       &:hover{
         background-color: rgba(0, 0, 0, 0.06);
+        border-radius: 50%;
         cursor: pointer;
       }
     }
