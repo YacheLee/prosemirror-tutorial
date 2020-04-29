@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {MdUndo} from "react-icons/md";
 import {undo} from "prosemirror-history";
 import {keydownHandler} from "prosemirror-keymap";
 import {Plugin} from 'prosemirror-state';
@@ -13,7 +14,7 @@ class UndoView{
     renderReactComponent(editorView){
         const disabled = !undo(editorView.state);
 
-        ReactDOM.render(<ToolbarButtonStyle disabled={disabled} onClick={e=>{
+        ReactDOM.render(<ToolbarButtonStyle component={MdUndo} disabled={disabled} onClick={e=>{
             e.preventDefault();
             editorView.focus();
             undo(editorView.state, editorView.dispatch);

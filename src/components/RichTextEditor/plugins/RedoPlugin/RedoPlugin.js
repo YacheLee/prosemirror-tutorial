@@ -4,6 +4,7 @@ import {MdRedo} from 'react-icons/md';
 import {redo} from "prosemirror-history";
 import {keydownHandler} from "prosemirror-keymap";
 import {Plugin} from 'prosemirror-state';
+import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 
 class RedoView {
     constructor(editorView) {
@@ -14,7 +15,7 @@ class RedoView {
 
     renderReactComponent(editorView) {
         const disabled = !redo(this.editorView.state);
-        ReactDOM.render(<MdRedo style={{color: disabled ? "red" : "black"}} onClick={e => {
+        ReactDOM.render(<ToolbarButtonStyle component={MdRedo} disabled={disabled} onClick={e => {
             e.preventDefault();
             editorView.focus();
             redo(editorView.state, editorView.dispatch);
