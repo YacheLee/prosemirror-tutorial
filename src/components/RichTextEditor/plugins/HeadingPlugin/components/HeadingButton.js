@@ -12,6 +12,7 @@ const CenterBox = styled.div`
 
 const Root = styled(CenterBox)`
   color: ${BLACK_COLOR};
+  font-size: 20px;
   &:hover{
     cursor: pointer;
   }

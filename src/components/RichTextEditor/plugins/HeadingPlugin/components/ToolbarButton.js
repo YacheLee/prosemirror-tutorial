@@ -10,7 +10,7 @@ function ToolbarButton({editorView, value}){
     const open = Boolean(anchorEl);
     const id = open ? 'heading-popover' : undefined;
 
-    return <ToolbarButtonStyle>
+    return <ToolbarButtonStyle style={{marginRight: 0}}>
         <HeadingButton
             value={value}
             onClick={({ currentTarget }) => {
