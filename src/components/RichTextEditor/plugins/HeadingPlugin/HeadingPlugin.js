@@ -3,47 +3,16 @@ import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
 import {setBlockType} from 'prosemirror-commands';
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
-
-const PARAGRAPH_VALUE = 0;
-
-function getSelectedHeadingValue(headingNodes = []) {
-    const set = new Set(headingNodes.map((node) => node.attrs.level));
-
-    if (set.size === 1) {
-        return set.values().next().value;
-    } else {
-        return PARAGRAPH_VALUE;
-    }
-}
-
-function getHeading(editorView) {
-    const { selection, tr } = editorView.state;
-    const { from, to } = selection;
-    const blockNodes = [];
-    const headingNodes = [];
-    tr.doc.nodesBetween(tr.mapping.map(from), tr.mapping.map(to), (node) => {
-        if (node.isBlock) {
-            blockNodes.push(node);
-            if (node.type.name === 'heading') {
-                headingNodes.push(node);
-            }
-        }
-    });
-
-    if (blockNodes.length === headingNodes.length) {
-        return getSelectedHeadingValue(headingNodes);
-    } else {
-        return PARAGRAPH_VALUE;
-    }
-}
+import {PARAGRAPH_VALUE} from './config';
+import getValue from './getValue';
 
 class ToolbarView{
     constructor(editorView) {
-        this.dom = document.createElement('span');
+        this.dom = document.createElement('div');
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
-        const value = getHeading(editorView);
+        const value = getValue(editorView);
 
         ReactDOM.render(
             <ToolbarButtonStyle>

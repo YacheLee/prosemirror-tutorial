@@ -10,6 +10,7 @@ import ItalicPlugin from './ItalicPlugin';
 import UnderlinePlugin from './UnderlinePlugin';
 import StrikeThroughPlugin from './StrikeThroughPlugin';
 import TextColorPlugin from './TextColorPlugin';
+import HeadingPlugin from './HeadingPlugin';
 
 function plugins(toolbarDom){
     return [
@@ -19,7 +20,7 @@ function plugins(toolbarDom){
         gapCursor(),
         UndoPlugin(toolbarDom),
         RedoPlugin(toolbarDom),
-        // HeadingPlugin(toolbarDom),
+        HeadingPlugin(toolbarDom),
         BoldPlugin(toolbarDom),
         ItalicPlugin(toolbarDom),
         UnderlinePlugin(toolbarDom),

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import {BLACK_COLOR, DEFAULT_FONT_SIZE, GREY_COLOR} from '../config';
+import {BLACK_COLOR, DEFAULT_FONT_SIZE, GREY_COLOR, TOOLBAR_BUTTON_SIZE} from '../config';
 
 const ToolbarActiveButtonStyle = styled.div`
     font-size: ${DEFAULT_FONT_SIZE};
-    width: 48px;
-    height: 48px;
+    width: ${TOOLBAR_BUTTON_SIZE}px;
+    height: ${TOOLBAR_BUTTON_SIZE}px;
     display: flex;
     justify-content: center;
     align-items: center;
