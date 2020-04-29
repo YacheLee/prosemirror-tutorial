@@ -1,6 +1,7 @@
 import {toggleMark} from 'prosemirror-commands';
+import {BLACK_COLOR} from '../config';
 
-const DEFAULT_COLOR = "black";
+const DEFAULT_COLOR = BLACK_COLOR;
 
 export function getColor(editorView) {
     const state = editorView.state;
@@ -58,8 +59,7 @@ function removeColor() {
 
 export function toggleColor(editorView, color) {
     const type = editorView.state.schema.marks.textColor;
-    const command = toggleMark(type, { color });
-    command(editorView.state, editorView.dispatch);
+    toggleMark(type, { color })(editorView.state, editorView.dispatch);
 }
 
 export function changeColor(editorView, color, state, dispatch) {
