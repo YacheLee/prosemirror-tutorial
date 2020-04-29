@@ -66,8 +66,6 @@ HeadingList.defaultProps = {
 };
 
 HeadingList.propTypes = {
-  // onClick: PropTypes.func,
-  value: [PARAGRAPH_VALUE, 1, 2, 3, 4, 5, 6]
 };
 
 export default HeadingList;
