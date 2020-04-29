@@ -12,7 +12,17 @@ function onLinkClick(editorView, hyperlinkElement, mark){
     setPopoverContent(<LinkPopover
         url={url}
         onEditLink={()=>{
-            setPopoverContent(<LinkEditPopover url={url} text={text} />);
+            setPopoverContent(<LinkEditPopover
+                url={url}
+                text={text}
+                onApply={({text, url})=>{
+                    setLinkHref(url, mark.pos)(
+                        editorView.state,
+                        editorView.dispatch
+                    );
+                    setPopoverAnchorElement(null);
+                }}
+            />);
         }}
         onCopyLink={()=>{
             copy(url);

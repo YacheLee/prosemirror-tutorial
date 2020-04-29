@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import _Paper from '@material-ui/core/Paper';
 
@@ -88,7 +88,9 @@ const Button = styled.div`
     }
 `;
 
-function LinkEditPopover({text, url}){
+function LinkEditPopover({text: _text, url: _url, onApply}){
+    const [text, setText] = useState(_text);
+    const [url, setUrl] = useState(_url);
     const text_id = _.uniqueId('text_')
     const link_id = _.uniqueId('link_')
 
@@ -96,12 +98,12 @@ function LinkEditPopover({text, url}){
         <div className="wrapper">
             <TextFieldContainer>
                 <Label htmlFor={text_id}>Text</Label>
-                <TextField id={text_id} value={text} />
+                <TextField id={text_id} value={text} onChange={e=>setText(e.target.value)} />
             </TextFieldContainer>
             <TextFieldContainer>
                 <Label htmlFor={link_id}>Link</Label>
-                <TextField id={link_id} value={url} />
-                <Button>Apply</Button>
+                <TextField id={link_id} value={url} onChange={e=>setUrl(e.target.value)} />
+                <Button onClick={()=>onApply({text, url})}>Apply</Button>
             </TextFieldContainer>
         </div>
     </Paper>
