@@ -2,6 +2,7 @@ import {Plugin} from 'prosemirror-state';
 import mark from './mark';
 import {className} from './config';
 import onLinkClick from './onLinkClick';
+import getActiveLinkMark from './getActiveLinkMark';
 
 function LinkPlugin(){
     return new Plugin({
@@ -15,7 +16,8 @@ function LinkPlugin(){
                 if (target) {
                     const hyperlinkElement = target.closest(`.${className}`);
                     if(hyperlinkElement){
-                        onLinkClick(hyperlinkElement);
+                        const mark = getActiveLinkMark(editorView.state);
+                        onLinkClick(editorView, hyperlinkElement, mark);
                     }
                 }
             }

@@ -58,24 +58,24 @@ const Paper = styled(_Paper)`
   }
 `;
 
-function LinkPopover({url}){
+function LinkPopover({url, onCopyLink, onEditLink, onRemoveLink}){
     return <Paper>
         <span className='global'><AiOutlineGlobal /></span>
         <Tooltip title={url}>
             <a target="_blank" rel="noopener noreferrer" href={url} title={url}>{url}</a>
         </Tooltip>
         <span className='tools'>
-            <Tooltip title="Copy link">
+            <Tooltip title="Copy link" onClick={onCopyLink}>
                 <span>
                     <FaRegCopy />
                 </span>
             </Tooltip>
-            <Tooltip title="Edit link">
+            <Tooltip title="Edit link" onClick={onEditLink}>
                 <span>
                     <FaRegEdit />
                 </span>
             </Tooltip>
-            <Tooltip title="Remove link">
+            <Tooltip title="Remove link" onClick={onRemoveLink}>
                 <span>
                     <FaUnlink />
                 </span>
