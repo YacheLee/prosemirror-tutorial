@@ -6,6 +6,7 @@ import Popover from 'react-tiny-popover';
 import {CompactPicker} from 'react-color';
 import mark from './mark';
 import {changeColor, getColor} from './commands';
+import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 
 function TextColorPopover({editorView, value, onChange}){
     const [open, setOpen] = useState(false);
@@ -31,14 +32,14 @@ function TextColorPopover({editorView, value, onChange}){
 
 class ToolbarView{
     constructor(editorView) {
-        this.dom = document.createElement('span');
+        this.dom = document.createElement('div');
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
         const value = getColor(editorView);
-        ReactDOM.render(<TextColorPopover editorView={editorView} value={value} onChange={value=>{
+        ReactDOM.render(<ToolbarButtonStyle><TextColorPopover editorView={editorView} value={value} onChange={value=>{
             changeColor(editorView, value, editorView.state, editorView.dispatch);
-        }} />, this.dom);
+        }} /></ToolbarButtonStyle>, this.dom);
     }
     update(editorView){
         this.renderReactComponent(editorView);

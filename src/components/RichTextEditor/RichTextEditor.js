@@ -8,6 +8,7 @@ import plugins from "./plugins";
 import nodes from "./nodes";
 import marks from "./marks";
 import './editor.css';
+import Divider from '@material-ui/core/Divider';
 
 const Toolbar = styled.div`
   padding: 4px 8px 4px 14px;
@@ -39,6 +40,7 @@ function RichTextEditor() {
     return (
         <Paper style={{margin: 12}}>
             <Toolbar ref={toolbar} />
+            <Divider light />
             <div ref={editor} />
         </Paper>
     );

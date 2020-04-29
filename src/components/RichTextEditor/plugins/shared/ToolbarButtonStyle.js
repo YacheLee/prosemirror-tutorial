@@ -10,7 +10,7 @@ const ToolbarButtonStyle = styled.div`
     box-pack: center;
     box-align: center;
     margin: 12px;
-    color: ${(props) => props.disabled ? 'rgba(0, 0, 0, 0.26)' : 'rgba(0, 0, 0, 0.54)'};
+    color: ${(props) => props.disabled ? 'rgba(0, 0, 0, 0.26)' : ''};
     &:hover {
         cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     }
