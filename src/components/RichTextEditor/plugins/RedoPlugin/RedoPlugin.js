@@ -15,11 +15,11 @@ class RedoView {
 
     renderReactComponent(editorView) {
         const disabled = !redo(this.editorView.state);
-        ReactDOM.render(<ToolbarButtonStyle component={MdRedo} disabled={disabled} onClick={e => {
+        ReactDOM.render(<ToolbarButtonStyle disabled={disabled} onClick={e => {
             e.preventDefault();
             editorView.focus();
             redo(editorView.state, editorView.dispatch);
-        }}/>, this.dom);
+        }}><MdRedo /></ToolbarButtonStyle>, this.dom);
     }
 
     update(editorView) {

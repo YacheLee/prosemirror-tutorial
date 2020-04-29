@@ -14,11 +14,13 @@ class UndoView{
     renderReactComponent(editorView){
         const disabled = !undo(editorView.state);
 
-        ReactDOM.render(<ToolbarButtonStyle component={MdUndo} disabled={disabled} onClick={e=>{
+        ReactDOM.render(<ToolbarButtonStyle disabled={disabled} onClick={e=>{
             e.preventDefault();
             editorView.focus();
             undo(editorView.state, editorView.dispatch);
-        }} />, this.dom);
+        }}>
+            <MdUndo />
+        </ToolbarButtonStyle>, this.dom);
     }
     update(editorView){
         this.renderReactComponent(editorView);
