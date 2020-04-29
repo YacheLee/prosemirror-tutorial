@@ -4,6 +4,7 @@ import {Plugin} from 'prosemirror-state';
 import {toggleMark} from "prosemirror-commands";
 import {keydownHandler} from "prosemirror-keymap";
 import {isActive} from './utils';
+import ToolbarActiveButtonStyle from '../shared/ToolbarActiveButtonStyle';
 
 function MarkPlugin(toolbarDom, Icon, mark, markType, attr, hotkey){
     function toggle(editorState, dispatch){
@@ -12,17 +13,19 @@ function MarkPlugin(toolbarDom, Icon, mark, markType, attr, hotkey){
 
     class ToolbarView{
         constructor(editorView) {
-            this.dom = document.createElement('span');
+            this.dom = document.createElement('div');
             this.renderReactComponent(editorView);
         }
         renderReactComponent(editorView){
             const mark = editorView.state.schema.marks[markType];
 
-            ReactDOM.render(<Icon style={{color: isActive(editorView.state, mark) ? "blue" : "black"}} onClick={e=>{
-                e.preventDefault();
-                editorView.focus();
-                toggle(editorView.state, editorView.dispatch);
-            }} />, this.dom);
+            ReactDOM.render(<ToolbarActiveButtonStyle isActive={isActive(editorView.state, mark)}>
+                <Icon onClick={e=>{
+                    e.preventDefault();
+                    editorView.focus();
+                    toggle(editorView.state, editorView.dispatch);
+                }} />
+            </ToolbarActiveButtonStyle>, this.dom);
         }
         update(editorView){
             this.renderReactComponent(editorView);

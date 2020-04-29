@@ -9,7 +9,7 @@ import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 class RedoView {
     constructor(editorView) {
         this.editorView = editorView;
-        this.dom = document.createElement('span');
+        this.dom = document.createElement('div');
         this.renderReactComponent(editorView);
     }
 
