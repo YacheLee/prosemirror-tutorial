@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
-import {MdTextFormat} from 'react-icons/md';
 import Popover from 'react-tiny-popover';
 import {CompactPicker} from 'react-color';
 import mark from './mark';
 import {changeColor, getColor} from './commands';
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
+import AButton from './AButton';
 
 function TextColorPopover({editorView, value, onChange}){
     const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ function TextColorPopover({editorView, value, onChange}){
             }
         }} />)}
     >
-        <MdTextFormat type='color' onClick={(e) => {
+        <AButton color={value} onClick={(e) => {
             e.preventDefault();
             editorView.focus();
             setOpen(!open);
@@ -38,9 +38,12 @@ class ToolbarView{
     }
     renderReactComponent(editorView){
         const value = getColor(editorView);
-        ReactDOM.render(<ToolbarButtonStyle><TextColorPopover editorView={editorView} value={value} onChange={value=>{
-            changeColor(editorView, value, editorView.state, editorView.dispatch);
-        }} /></ToolbarButtonStyle>, this.dom);
+        ReactDOM.render(<ToolbarButtonStyle>
+            <TextColorPopover editorView={editorView} value={value} onChange={value=>{
+                changeColor(editorView, value, editorView.state, editorView.dispatch);
+            }} />
+        </ToolbarButtonStyle>,
+        this.dom);
     }
     update(editorView){
         this.renderReactComponent(editorView);

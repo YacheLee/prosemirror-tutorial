@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import {DEFAULT_FONT_SIZE} from '../config';
 
@@ -7,8 +6,6 @@ const ToolbarButtonStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-pack: center;
-    box-align: center;
     margin: 12px;
     color: ${(props) => props.disabled ? 'rgba(0, 0, 0, 0.26)' : ''};
     &:hover {

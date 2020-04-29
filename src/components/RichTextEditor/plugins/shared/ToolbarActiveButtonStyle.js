@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import {BLACK_COLOR, DEFAULT_FONT_SIZE, GREY_COLOR} from '../config';
 
