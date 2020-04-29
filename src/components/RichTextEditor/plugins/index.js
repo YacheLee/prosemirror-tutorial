@@ -9,8 +9,6 @@ import BoldPlugin from "./BoldPlugin";
 import ItalicPlugin from './ItalicPlugin';
 import UnderlinePlugin from './UnderlinePlugin';
 import StrikeThroughPlugin from './StrikeThroughPlugin';
-import HeadingPlugin from './HeadingPlugin';
-import TextColorPlugin from './TextColorPlugin';
 
 function plugins(toolbarDom){
     return [
@@ -20,12 +18,12 @@ function plugins(toolbarDom){
         gapCursor(),
         UndoPlugin(toolbarDom),
         RedoPlugin(toolbarDom),
-        HeadingPlugin(toolbarDom),
+        // HeadingPlugin(toolbarDom),
         BoldPlugin(toolbarDom),
         ItalicPlugin(toolbarDom),
         UnderlinePlugin(toolbarDom),
         StrikeThroughPlugin(toolbarDom),
-        TextColorPlugin(toolbarDom)
+        // TextColorPlugin(toolbarDom)
     ];
 }
 
