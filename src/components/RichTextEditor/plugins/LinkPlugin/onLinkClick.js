@@ -4,6 +4,7 @@ import {setPopoverAnchorElement, setPopoverContent} from '../../RichTextEditor';
 import LinkPopover from './components/LinkPopover';
 import setLinkHref from './setLinkHref';
 import LinkEditPopover from './components/LinkEditPopover';
+import setLinkText from './setLinkText';
 
 function onLinkClick(editorView, hyperlinkElement, mark){
     const url = hyperlinkElement.getAttribute('href');
@@ -19,6 +20,10 @@ function onLinkClick(editorView, hyperlinkElement, mark){
                     setLinkHref(url, mark.pos)(
                         editorView.state,
                         editorView.dispatch
+                    );
+                    setLinkText(text, mark.pos)(
+                        editorView.state,
+                        editorView.dispatch,
                     );
                     setPopoverAnchorElement(null);
                 }}
