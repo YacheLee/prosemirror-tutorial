@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
 import mark from './mark';
 import {getColor} from './commands';
-import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 import TextColorToolbarButton from './TextColorToolbarButton';
 
 class ToolbarView{
@@ -13,10 +12,7 @@ class ToolbarView{
     }
     renderReactComponent(editorView){
         const value = getColor(editorView);
-        ReactDOM.render(<ToolbarButtonStyle>
-            <TextColorToolbarButton editorView={editorView} value={value} />
-        </ToolbarButtonStyle>,
-        this.dom);
+        ReactDOM.render(<TextColorToolbarButton editorView={editorView} value={value} />, this.dom);
     }
     update(editorView){
         this.renderReactComponent(editorView);
