@@ -30,12 +30,18 @@ function TextColorToolbarButton({editorView, value}){
                 vertical: 'top',
                 horizontal: 'center'
             }}>
-            <CompactPicker color={value} onChange={({hex}) => {
-                if(hex){
-                    changeColor(editorView, hex);
-                    setAnchorEl(null);
+            <div onMouseDown={(e)=>{
+                if(e.target.tagName !== 'INPUT'){
+                    e.preventDefault();
                 }
-            }} />
+            }} >
+                <CompactPicker color={value} onChangeComplete={({hex}, event) => {
+                    if(hex){
+                        changeColor(editorView, hex);
+                        setAnchorEl(null);
+                    }
+                }} />
+            </div>
         </Popover>
     </Fragment>
 }

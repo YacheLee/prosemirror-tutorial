@@ -60,9 +60,7 @@ function RichTextEditor({id, value}) {
 
     return (
         <Paper style={{margin: 12}}>
-            <Toolbar ref={toolbar} onMouseDown={e=>{
-                e.preventDefault();
-            }} />
+            <Toolbar ref={toolbar} />
             <Divider light />
             <div ref={editor} />
             {editorView && <Popover
@@ -71,7 +69,6 @@ function RichTextEditor({id, value}) {
                 anchorEl={anchorEl}
                 onClose={() => {
                     _setAnchorEl(null);
-                    editorView.focus();
                 }}
                 anchorOrigin={{
                     vertical: 'bottom',
