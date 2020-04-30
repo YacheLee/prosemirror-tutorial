@@ -60,14 +60,18 @@ function RichTextEditor({id, value}) {
 
     return (
         <Paper style={{margin: 12}}>
-            <Toolbar ref={toolbar} />
+            <Toolbar ref={toolbar} onMouseDown={e=>{
+                if(e.target.tagName!=='INPUT'){
+                    e.preventDefault();
+                }
+            }} />
             <Divider light />
             <div ref={editor} />
             {editorView && <Popover
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={() => {
+                onClose={(e) => {
                     _setAnchorEl(null);
                 }}
                 anchorOrigin={{
