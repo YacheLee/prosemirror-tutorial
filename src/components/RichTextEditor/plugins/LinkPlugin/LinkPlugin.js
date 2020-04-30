@@ -3,12 +3,10 @@ import {Plugin} from 'prosemirror-state';
 import ReactDOM from 'react-dom';
 
 import mark from './mark';
-import {className} from './config';
 import onLinkClick from './onLinkClick';
-import getActiveLinkMark from './getActiveLinkMark';
+import LinkToolbarButton from './components/LinkToolbarButton';
 
 import './LinkPlugin.css';
-import LinkToolbarButton from './components/LinkToolbarButton';
 
 class View{
     constructor(editorView) {
@@ -36,18 +34,7 @@ function LinkPlugin(toolbarDom){
         },
         mark,
         props: {
-            handleClick: (editorView, _pos, event) =>{
-                const {target} = event;
-                if (target) {
-                    const hyperlinkElement = target.closest(`.${className}`);
-                    if(hyperlinkElement){
-                        const mark = getActiveLinkMark(editorView.state);
-                        if(mark){
-                            onLinkClick(editorView, hyperlinkElement, mark);
-                        }
-                    }
-                }
-            }
+            handleClick: onLinkClick
         }
     });
 }
