@@ -8,7 +8,7 @@ import {changeColor, getColor} from './commands';
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 import AButton from './AButton';
 
-function TextColorPopover({editorView, value, onChange}){
+function TextColorPopover({editorView, value}){
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const id = open ? 'text-color-popover' : undefined;
@@ -31,7 +31,7 @@ function TextColorPopover({editorView, value, onChange}){
             }}>
             <CompactPicker color={value} onChange={({hex}) => {
                 if(hex){
-                    onChange(hex);
+                    changeColor(editorView, hex);
                     setAnchorEl(null);
                 }
             }} />
@@ -52,9 +52,7 @@ class ToolbarView{
     renderReactComponent(editorView){
         const value = getColor(editorView);
         ReactDOM.render(<ToolbarButtonStyle>
-            <TextColorPopover editorView={editorView} value={value} onChange={value=>{
-                changeColor(editorView, value, editorView.state, editorView.dispatch);
-            }} />
+            <TextColorPopover editorView={editorView} value={value} />
         </ToolbarButtonStyle>,
         this.dom);
     }
