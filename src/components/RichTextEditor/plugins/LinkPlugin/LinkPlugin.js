@@ -1,16 +1,14 @@
 import React from 'react';
 import {Plugin} from 'prosemirror-state';
 import ReactDOM from 'react-dom';
-import {MdInsertLink} from 'react-icons/md';
 
 import mark from './mark';
 import {className} from './config';
 import onLinkClick from './onLinkClick';
 import getActiveLinkMark from './getActiveLinkMark';
 
-import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
-import onInsertLinkClick from './onInsertLinkClick';
 import './LinkPlugin.css';
+import LinkToolbarButton from './components/LinkToolbarButton';
 
 class View{
     constructor(editorView) {
@@ -18,12 +16,7 @@ class View{
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
-        ReactDOM.render(<ToolbarButtonStyle onClick={e=>{
-            e.preventDefault();
-            onInsertLinkClick(editorView, e.currentTarget);
-        }}>
-            <MdInsertLink />
-        </ToolbarButtonStyle>, this.dom);
+        ReactDOM.render(<LinkToolbarButton editorView={editorView} />, this.dom);
     }
     update(editorView){
         this.renderReactComponent(editorView);

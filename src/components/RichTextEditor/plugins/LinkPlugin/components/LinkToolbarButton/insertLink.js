@@ -1,4 +1,4 @@
-import filter from './filter';
+import filter from '../../filter';
 
 function canLinkBeCreatedInRange(from, to){
     return (state)=>{
