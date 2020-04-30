@@ -88,7 +88,7 @@ const Button = styled.div`
     }
 `;
 
-function LinkEditPopover({text: _text, url: _url, onApply}){
+function LinkEditPopover({text: _text="", url: _url="", onApply}){
     const [text, setText] = useState(_text);
     const [url, setUrl] = useState(_url);
     const text_id = _.uniqueId('text_')
