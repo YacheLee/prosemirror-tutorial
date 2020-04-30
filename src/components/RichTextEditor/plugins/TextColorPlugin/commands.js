@@ -59,10 +59,10 @@ function removeColor() {
 
 export function toggleColor(editorView, color) {
     const type = editorView.state.schema.marks.textColor;
-    toggleMark(type, { color })(editorView.state, editorView.dispatch);
+    return toggleMark(type, { color });
 }
 
-export function changeColor(editorView, color, state, dispatch) {
-    removeColor()(state, dispatch);
-    toggleColor(editorView, color);
+export function changeColor(editorView, color) {
+    removeColor()(editorView.state, editorView.dispatch);
+    toggleColor(editorView, color)(editorView.state, editorView.dispatch);
 }
