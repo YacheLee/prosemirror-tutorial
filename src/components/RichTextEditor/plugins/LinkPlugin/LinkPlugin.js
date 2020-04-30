@@ -10,6 +10,7 @@ import getActiveLinkMark from './getActiveLinkMark';
 
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 import onInsertLinkClick from './onInsertLinkClick';
+import './LinkPlugin.css';
 
 class View{
     constructor(editorView) {
