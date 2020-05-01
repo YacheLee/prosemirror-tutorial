@@ -23,6 +23,10 @@ const Toolbar = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-shrink: 0;
+  
+  >div{
+    border: solid 1px red;
+  }
 `;
 
 export let setPopoverAnchorElement = null;
@@ -59,7 +63,7 @@ function RichTextEditor({id, value}) {
 
     return (
         <Paper style={{margin: 12}}>
-            <Toolbar ref={toolbar} />
+            <Toolbar ref={toolbar} onMouseDown={e=>e.preventDefault()} />
             <Divider light />
             <div ref={editor} />
             {
