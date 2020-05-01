@@ -31,7 +31,7 @@ function insertLink( from, href, text){
             tr.addMark( from, from + textContent.length, link.create({ href }));
 
             if (dispatch) {
-                dispatch(tr);
+                dispatch(tr.scrollIntoView());
             }
             return true;
         }
