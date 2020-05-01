@@ -23,10 +23,6 @@ const Toolbar = styled.div`
   display: flex;
   flex: 0 0 auto;
   flex-shrink: 0;
-  
-  >div{
-    border: solid 1px red;
-  }
 `;
 
 export let setPopoverAnchorElement = null;

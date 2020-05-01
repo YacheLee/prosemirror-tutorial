@@ -13,24 +13,24 @@ function MarkPlugin(toolbarDom, Icon, mark, markType, attr, hotkey){
 
     class ToolbarView{
         constructor(editorView) {
-            this.dom = document.createElement('div');
+            this.dom = this.toolbarButtonDom = document.createElement('div');
             this.renderReactComponent(editorView);
         }
         renderReactComponent(editorView){
             const mark = editorView.state.schema.marks[markType];
 
-            ReactDOM.render(<ToolbarActiveButtonStyle isActive={isActive(editorView.state, mark)}>
-                <Icon onClick={e=>{
-                    e.preventDefault();
-                    editorView.focus();
-                    toggle(editorView.state, editorView.dispatch);
-                }} />
-            </ToolbarActiveButtonStyle>, this.dom);
+            ReactDOM.render(<ToolbarActiveButtonStyle isActive={isActive(editorView.state, mark)}  onClick={e=>{
+                e.preventDefault();
+                editorView.focus();
+                toggle(editorView.state, editorView.dispatch);
+            }}>
+                <Icon />
+            </ToolbarActiveButtonStyle>, this.toolbarButtonDom);
         }
         update(editorView){
             this.renderReactComponent(editorView);
         }
-        destroy() { this.dom.remove() }
+        destroy() { this.toolbarButtonDom.remove() }
     }
 
     const pluginConfig = {

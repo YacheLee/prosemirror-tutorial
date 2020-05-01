@@ -8,6 +8,10 @@ const ToolbarActiveButtonStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+      
+    &:hover{
+        cursor: pointer;
+    }
 
     svg {
       background-color: ${(props) => (props.isActive ? BLACK_COLOR : 'white')};
@@ -15,10 +19,9 @@ const ToolbarActiveButtonStyle = styled.div`
       border-radius: 5px;
       
       &:hover{
-          background-color: ${(props) => (props.isActive ? BLACK_COLOR : GREY_COLOR)};
-          color: ${(props) => (props.isActive ? 'white' : BLACK_COLOR)};
-      cursor: pointer;
-       }
+        background-color: ${(props) => (props.isActive ? BLACK_COLOR : GREY_COLOR)};
+        color: ${(props) => (props.isActive ? 'white' : BLACK_COLOR)};
+      }
     }
 `;
 
