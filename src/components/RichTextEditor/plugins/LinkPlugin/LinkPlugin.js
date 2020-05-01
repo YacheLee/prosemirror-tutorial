@@ -10,16 +10,16 @@ import './LinkPlugin.css';
 
 class View{
     constructor(editorView) {
-        this.dom = document.createElement('div');
+        this.dom = this.toolbarButtonDom = document.createElement('div');
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
-        ReactDOM.render(<LinkToolbarButton editorView={editorView} />, this.dom);
+        ReactDOM.render(<LinkToolbarButton toolbarButtonDom={this.toolbarButtonDom} editorView={editorView} />, this.toolbarButtonDom);
     }
     update(editorView){
         this.renderReactComponent(editorView);
     }
-    destroy() { this.dom.remove() }
+    destroy() { this.toolbarButtonDom.remove() }
 }
 
 function LinkPlugin(toolbarDom){

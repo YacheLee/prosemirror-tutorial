@@ -5,13 +5,14 @@ import LinkEditPopover from '../LinkEditPopover';
 import insertLink from './insertLink';
 import {setPopoverAnchorElement, setPopoverContent} from '../../../../RichTextEditor';
 
-function LinkToolbarButton({editorView}){
+function LinkToolbarButton({editorView, toolbarButtonDom}){
     const [open, setOpen] = useState(false);
 
     return <ToolbarButtonStyle onClick={event => {
+        event.preventDefault();
         if(!open){
             setOpen(true);
-            setPopoverAnchorElement(event.target);
+            setPopoverAnchorElement(toolbarButtonDom);
             setPopoverContent(
                 <LinkEditPopover onApply={({text, url}) => {
                     insertLink(editorView.state.selection.from, url, text)(editorView.state, editorView.dispatch);

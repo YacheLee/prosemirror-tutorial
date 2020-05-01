@@ -7,17 +7,17 @@ import TextColorToolbarButton from './TextColorToolbarButton';
 
 class ToolbarView{
     constructor(editorView) {
-        this.dom = document.createElement('div');
+        this.dom = this.toolbarButtonDom = document.createElement('div');
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
         const value = getColor(editorView);
-        ReactDOM.render(<TextColorToolbarButton editorView={editorView} value={value} />, this.dom);
+        ReactDOM.render(<TextColorToolbarButton toolbarButtonDom={this.toolbarButtonDom} editorView={editorView} value={value} />, this.toolbarButtonDom);
     }
     update(editorView){
         this.renderReactComponent(editorView);
     }
-    destroy() { this.dom.remove() }
+    destroy() { this.toolbarButtonDom.remove() }
 }
 
 function TextColorPlugin(toolbarDom){

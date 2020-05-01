@@ -5,13 +5,14 @@ import AButton from './AButton';
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
 import {setPopoverAnchorElement, setPopoverContent} from '../../RichTextEditor';
 
-function TextColorToolbarButton({editorView, value}) {
+function TextColorToolbarButton({editorView, value, toolbarButtonDom}) {
     const [open, setOpen] = useState(false);
 
-    return <ToolbarButtonStyle onClick={event => {
+    return <ToolbarButtonStyle onClick={(event) => {
+        event.preventDefault();
         if (!open) {
             setOpen(true);
-            setPopoverAnchorElement(event.target);
+            setPopoverAnchorElement(toolbarButtonDom);
             setPopoverContent(
                 <CompactPicker color={value} onChangeComplete={({hex}) => {
                     if(hex){
