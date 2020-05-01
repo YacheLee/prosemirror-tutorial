@@ -98,11 +98,11 @@ function LinkEditPopover({text: _text="", url: _url="", onApply}){
         <div className="wrapper">
             <TextFieldContainer>
                 <Label htmlFor={text_id}>Text</Label>
-                <TextField id={text_id} value={text} onChange={e=>setText(e.target.value)} />
+                <TextField autoFocus={true} id={text_id} value={text} onChange={e=>setText(e.target.value)} />
             </TextFieldContainer>
             <TextFieldContainer>
                 <Label htmlFor={link_id}>Link</Label>
-                <TextField autoFocus={true} id={link_id} value={url} onChange={e=>setUrl(e.target.value)} />
+                <TextField id={link_id} value={url} onChange={e=>setUrl(e.target.value)} />
                 <Button onClick={()=>onApply({text, url})}>Apply</Button>
             </TextFieldContainer>
         </div>
