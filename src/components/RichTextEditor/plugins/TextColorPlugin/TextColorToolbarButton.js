@@ -1,43 +1,31 @@
-import React from "react";
-import Popover from '@material-ui/core/Popover';
+import React, {useState} from "react";
 import {CompactPicker} from 'react-color';
 import {changeColor} from './commands';
 import AButton from './AButton';
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
+import {setPopoverAnchorElement, setPopoverContent} from '../../RichTextEditor';
 
-function TextColorToolbarButton({editorView, value}){
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const id = open ? 'text-color-popover' : undefined;
+function TextColorToolbarButton({editorView, value}) {
+    const [open, setOpen] = useState(false);
 
-    return <ToolbarButtonStyle onMouseDown={(e)=>{
-        if(e.target.tagName!=='INPUT'){
-            e.preventDefault();
+    return <ToolbarButtonStyle onClick={event => {
+        if (!open) {
+            setOpen(true);
+            setPopoverAnchorElement(event.target);
+            setPopoverContent(
+                <CompactPicker color={value} onChangeComplete={({hex}) => {
+                    if(hex){
+                        changeColor(editorView, hex);
+                        setPopoverAnchorElement(null);
+                    }
+                }} />
+            );
+        } else {
+            setPopoverAnchorElement(null);
+            setOpen(false);
         }
     }}>
-        <AButton color={value} onClick={e => setAnchorEl(e.currentTarget)}/>
-        <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={() => {
-                setAnchorEl(null);
-            }}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right'
-            }}
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center'
-            }}>
-            <CompactPicker color={value} onChangeComplete={({hex}) => {
-                if(hex){
-                    changeColor(editorView, hex);
-                    setAnchorEl(null);
-                }
-            }} />
-        </Popover>
+        <AButton color={value}/>
     </ToolbarButtonStyle>
 }
 
