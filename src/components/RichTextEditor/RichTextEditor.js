@@ -5,7 +5,7 @@ import {EditorState} from "prosemirror-state";
 import {EditorView} from "prosemirror-view";
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import Popover from '@material-ui/core/Popover';
+import Popover from './components/Popover';
 import plugins from "./plugins";
 import nodes from "./nodes";
 import marks from "./marks";
@@ -31,12 +31,11 @@ export let setPopoverContent = null;
 function RichTextEditor({id, value}) {
     const editor = useRef(null);
     const toolbar = useRef(null);
-    const [anchorEl, _setAnchorEl] = useState(null);
     const [editorView, setEditorView] = useState(null);
+    const [anchorEl, _setAnchorEl] = useState(null);
     const [popoverContent, _setPopoverContent] = useState(null);
     setPopoverAnchorElement = _setAnchorEl;
     setPopoverContent = _setPopoverContent;
-    const open = Boolean(anchorEl);
 
     const init = useCallback(()=>{
         if(!editorView){
@@ -63,24 +62,11 @@ function RichTextEditor({id, value}) {
             <Toolbar ref={toolbar} />
             <Divider light />
             <div ref={editor} />
-            {editorView && <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={(e) => {
-                    _setAnchorEl(null);
-                }}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left'
-                }}
-            >
-                {popoverContent}
-            </Popover>}
+            {
+                editorView && <Popover id={`popover_${id}`} anchorEl={anchorEl} onClose={() => _setAnchorEl(null)}>
+                    {popoverContent}
+                </Popover>
+            }
         </Paper>
     );
 }
