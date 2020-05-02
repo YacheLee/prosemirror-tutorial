@@ -3,7 +3,7 @@ import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {closePopover, isTopPopover} from '../../RichTextEditor';
 
-function Popover({id, anchorEl, onClose, children}) {
+function Popover({id, anchorEl, children}) {
     const open = Boolean(anchorEl);
 
     useEffect(() => {
@@ -23,14 +23,14 @@ function Popover({id, anchorEl, onClose, children}) {
 
     return <ClickAwayListener onClickAway={event=>{
         if(event.composedPath().indexOf(anchorEl)===-1){
-            onClose(null);
+            closePopover();
         }
     }}>
         <Popper
             id={id}
             open={open}
             anchorEl={anchorEl}
-            onClose={onClose}
+            onClose={closePopover}
         >
             <Fragment>
                 {children}

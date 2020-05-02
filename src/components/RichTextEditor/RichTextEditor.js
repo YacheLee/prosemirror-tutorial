@@ -77,7 +77,7 @@ function RichTextEditor({id, value}) {
             <Divider light />
             <div ref={editor} />
             {
-                editorView && <Popover id={`popover_${id}`} anchorEl={anchorEl} onClose={() => _setAnchorEl(null)}>
+                editorView && <Popover id={`popover_${id}`} anchorEl={anchorEl}>
                     {popoverContent}
                 </Popover>
             }
