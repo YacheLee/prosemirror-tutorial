@@ -5,6 +5,7 @@ import LinkEditPopover from '../LinkEditPopover';
 import insertLink from './insertLink';
 import PopoverManager from '../../../../PopoverManager';
 import setLinkHref from '../../setLinkHref';
+import setLinkText from '../../setLinkText';
 
 function getSelectedText(state, from, to) {
     const selectedNode = state.doc.cut(from, to);
@@ -39,6 +40,7 @@ function LinkToolbarButton({editorView, toolbarButtonDom}){
                     }
                     else{
                         setLinkHref(url, from ,to)(editorView.state, editorView.dispatch);
+                        setLinkText(text, from, to)(editorView.state, editorView.dispatch);
                     }
                     PopoverManager.closePopover();
                 }}/>
