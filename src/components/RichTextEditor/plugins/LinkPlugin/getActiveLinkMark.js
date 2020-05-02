@@ -17,7 +17,7 @@ function isSelectionAroundLink(state) {
 }
 
 function getActiveLinkMark(state) {
-    const $from = state.selection.$from;
+    const {$from} = state.selection;
     if (isSelectionInsideLink(state) || isSelectionAroundLink(state)) {
         const pos = $from.pos - $from.textOffset;
         const node = state.doc.nodeAt(pos);
