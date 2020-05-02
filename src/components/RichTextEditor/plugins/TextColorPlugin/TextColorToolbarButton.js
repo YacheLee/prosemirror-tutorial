@@ -18,6 +18,7 @@ function TextColorToolbarButton({editorView, value, toolbarButtonDom}) {
                     if(hex){
                         changeColor(editorView, hex);
                         setPopoverAnchorElement(null);
+                        setOpen(false);
                     }
                 }} />
             );
