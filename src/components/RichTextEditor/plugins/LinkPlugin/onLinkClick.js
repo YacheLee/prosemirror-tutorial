@@ -1,12 +1,12 @@
 import React from 'react';
 import copy from 'copy-to-clipboard';
-import {setPopoverAnchorElement, setPopoverContent} from '../../RichTextEditor';
 import LinkPopover from './components/LinkPopover';
 import setLinkHref from './setLinkHref';
 import LinkEditPopover from './components/LinkEditPopover';
 import setLinkText from './setLinkText';
 import {className} from './config';
 import getActiveLinkMark from './getActiveLinkMark';
+import PopoverManager from '../../PopoverManager';
 
 function onLinkClick(editorView, _pos, event){
     const {target} = event;
@@ -18,10 +18,10 @@ function onLinkClick(editorView, _pos, event){
                 const url = hyperlinkElement.getAttribute('href');
                 const text = hyperlinkElement.innerText;
 
-                setPopoverContent(<LinkPopover
+                PopoverManager.setPopoverContent(<LinkPopover
                     url={url}
                     onEditLink={()=>{
-                        setPopoverContent(<LinkEditPopover
+                        PopoverManager.setPopoverContent(<LinkEditPopover
                             url={url}
                             text={text}
                             onApply={({text, url})=>{
@@ -33,23 +33,23 @@ function onLinkClick(editorView, _pos, event){
                                     editorView.state,
                                     editorView.dispatch,
                                 );
-                                setPopoverAnchorElement(null);
+                                PopoverManager.setPopoverAnchorElement(null);
                             }}
                         />);
                     }}
                     onCopyLink={()=>{
                         copy(url);
-                        setPopoverAnchorElement(null);
+                        PopoverManager.setPopoverAnchorElement(null);
                     }}
                     onRemoveLink={()=>{
                         setLinkHref('', mark.pos)(
                             editorView.state,
                             editorView.dispatch
                         );
-                        setPopoverAnchorElement(null);
+                        PopoverManager.setPopoverAnchorElement(null);
                     }}
                 />);
-                setPopoverAnchorElement(hyperlinkElement);
+                PopoverManager.setPopoverAnchorElement(hyperlinkElement);
             }
         }
     }

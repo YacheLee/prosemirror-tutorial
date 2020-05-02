@@ -1,11 +1,11 @@
 import {useEffect} from 'react';
-import {closePopover, isTopPopover} from '../../RichTextEditor';
+import PopoverManager from '../../PopoverManager';
 
 function useEscClose(){
     useEffect(() => {
         function onKeyDown(event){
-            if (event.key === 'Escape' && isTopPopover()) {
-                closePopover();
+            if (event.key === 'Escape' && PopoverManager.isTopPopover()) {
+                PopoverManager.closePopover();
             }
         }
 

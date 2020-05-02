@@ -3,22 +3,22 @@ import {MdInsertLink} from 'react-icons/md';
 import ToolbarButtonStyle from '../../../shared/ToolbarButtonStyle';
 import LinkEditPopover from '../LinkEditPopover';
 import insertLink from './insertLink';
-import {closePopover, getPopoverElement, setPopoverAnchorElement, setPopoverContent} from '../../../../RichTextEditor';
+import PopoverManager from '../../../../PopoverManager';
 
 function LinkToolbarButton({editorView, toolbarButtonDom}){
     return <ToolbarButtonStyle onClick={event => {
         event.preventDefault();
 
         //toggle
-        if(getPopoverElement()===toolbarButtonDom){
-            closePopover();
+        if(PopoverManager.getAnchorEl()===toolbarButtonDom){
+            PopoverManager.closePopover();
         }
         else{
-            setPopoverAnchorElement(toolbarButtonDom);
-            setPopoverContent(
+            PopoverManager.setPopoverAnchorElement(toolbarButtonDom);
+            PopoverManager.setPopoverContent(
                 <LinkEditPopover onApply={({text, url}) => {
                     insertLink(editorView.state.selection.from, url, text)(editorView.state, editorView.dispatch);
-                    closePopover();
+                    PopoverManager.closePopover();
                 }}/>
             );
         }

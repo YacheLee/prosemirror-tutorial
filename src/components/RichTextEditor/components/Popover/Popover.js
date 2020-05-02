@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {closePopover} from '../../RichTextEditor';
 import useEscClose from './useEscClose';
+import PopoverManager from '../../PopoverManager';
 
 function Popover({id, anchorEl, children}) {
     const open = Boolean(anchorEl);
@@ -10,14 +10,14 @@ function Popover({id, anchorEl, children}) {
 
     return <ClickAwayListener onClickAway={event=>{
         if(event.composedPath().indexOf(anchorEl)===-1){
-            closePopover();
+            PopoverManager.closePopover();
         }
     }}>
         <Popper
             id={id}
             open={open}
             anchorEl={anchorEl}
-            onClose={closePopover}
+            onClose={PopoverManager.closePopover}
         >
             <Fragment>
                 {children}

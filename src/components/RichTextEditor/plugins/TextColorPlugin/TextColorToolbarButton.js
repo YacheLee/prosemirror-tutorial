@@ -3,23 +3,23 @@ import {CompactPicker} from 'react-color';
 import {changeColor} from './commands';
 import AButton from './AButton';
 import ToolbarButtonStyle from '../shared/ToolbarButtonStyle';
-import {closePopover, getPopoverElement, setPopoverAnchorElement, setPopoverContent} from '../../RichTextEditor';
+import PopoverManager from '../../PopoverManager';
 
 function TextColorToolbarButton({editorView, value, toolbarButtonDom}) {
     return <ToolbarButtonStyle onClick={(event) => {
         event.preventDefault();
 
         //toggle
-        if(getPopoverElement()===toolbarButtonDom){
-            closePopover();
+        if(PopoverManager.getAnchorEl()===toolbarButtonDom){
+            PopoverManager.closePopover();
         }
         else{
-            setPopoverAnchorElement(toolbarButtonDom);
-            setPopoverContent(
+            PopoverManager.setPopoverAnchorElement(toolbarButtonDom);
+            PopoverManager.setPopoverContent(
                 <CompactPicker color={value} onChangeComplete={({hex}) => {
                     if(hex){
                         changeColor(editorView, hex);
-                        closePopover();
+                        PopoverManager.closePopover();
                     }
                 }} />
             );
