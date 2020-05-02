@@ -34,20 +34,20 @@ function onLinkClick(editorView, _pos, event){
                                     editorView.state,
                                     editorView.dispatch,
                                 );
-                                PopoverManager.setPopoverAnchorElement(null);
+                                PopoverManager.closePopover();
                             }}
                         />);
                     }}
                     onCopyLink={()=>{
                         copy(url);
-                        PopoverManager.setPopoverAnchorElement(null);
+                        PopoverManager.closePopover();
                     }}
                     onRemoveLink={()=>{
                         setLinkHref('', mark.pos)(
                             editorView.state,
                             editorView.dispatch
                         );
-                        PopoverManager.setPopoverAnchorElement(null);
+                        PopoverManager.closePopover();
                     }}
                 />);
             }
