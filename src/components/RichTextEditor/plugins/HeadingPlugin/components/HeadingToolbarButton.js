@@ -1,12 +1,12 @@
 import React, {Fragment} from 'react';
 import styled from 'styled-components';
-import Popover from '@material-ui/core/Popover';
 import {MdArrowDropDown} from 'react-icons/md';
 import {BLACK_COLOR} from '../../config';
 import getLabel from '../getLabel';
 import ToolbarButtonStyle from '../../shared/ToolbarButtonStyle';
 import HeadingList from './HeadingList';
 import onHeadingClick from '../onHeadingClick';
+import PopoverManager from '../../../PopoverManager';
 
 const CenterBox = styled.div`
   display: flex;
@@ -24,42 +24,32 @@ const ToolbarButton = styled(ToolbarButtonStyle)`
   }
 `;
 
-function HeadingToolbarButton({editorView, value}) {
+function HeadingToolbarButton({editorView, value, toolbarButtonDom}) {
     const label = getLabel(value);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const id = open ? 'heading-popover' : undefined;
 
     return (
         <Fragment>
             <ToolbarButton onClick={(e)=>{
-                setAnchorEl(e.currentTarget);
+                e.preventDefault();
+
+                //toggle
+                if(PopoverManager.getAnchorEl()===toolbarButtonDom){
+                    PopoverManager.closePopover();
+                }
+                else{
+                    PopoverManager.setPopoverAnchorElement(toolbarButtonDom);
+                    PopoverManager.setPopoverContent(
+                        <HeadingList onClick={(level)=>{
+                            onHeadingClick(editorView, level);
+                            PopoverManager.setPopoverAnchorElement(null);
+                        }} />);
+                }
             }}>
                 <CenterBox>{label}</CenterBox>
                 <CenterBox>
                     <MdArrowDropDown/>
                 </CenterBox>
             </ToolbarButton>
-            <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={() => {
-                    setAnchorEl(null);
-                }}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right'
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center'
-                }}>
-                <HeadingList onClick={(level)=>{
-                    onHeadingClick(editorView, level);
-                    setAnchorEl(null);
-                }} />
-            </Popover>
         </Fragment>
     );
 }

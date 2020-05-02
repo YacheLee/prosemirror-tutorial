@@ -6,13 +6,13 @@ import HeadingToolbarButton from './components/HeadingToolbarButton';
 
 class ToolbarView{
     constructor(editorView) {
-        this.dom = document.createElement('div');
+        this.dom = this.toolbarButtonDom = document.createElement('div');
         this.renderReactComponent(editorView);
     }
     renderReactComponent(editorView){
         const value = getValue(editorView);
 
-        ReactDOM.render(<HeadingToolbarButton editorView={editorView} value={value} />
+        ReactDOM.render(<HeadingToolbarButton toolbarButtonDom={this.toolbarButtonDom} editorView={editorView} value={value} />
         , this.dom);
     }
     update(editorView){
