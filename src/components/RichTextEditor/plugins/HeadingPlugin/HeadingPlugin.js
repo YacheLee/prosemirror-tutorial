@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Plugin} from 'prosemirror-state';
 import getValue from './getValue';
-import ToolbarButton from './components/ToolbarButton';
+import HeadingToolbarButton from './components/HeadingToolbarButton';
 
 class ToolbarView{
     constructor(editorView) {
@@ -12,8 +12,7 @@ class ToolbarView{
     renderReactComponent(editorView){
         const value = getValue(editorView);
 
-        ReactDOM.render(
-            <ToolbarButton editorView={editorView} value={value} />
+        ReactDOM.render(<HeadingToolbarButton editorView={editorView} value={value} />
         , this.dom);
     }
     update(editorView){
