@@ -18,6 +18,7 @@ function onLinkClick(editorView, _pos, event){
                 const url = hyperlinkElement.getAttribute('href');
                 const text = hyperlinkElement.innerText;
 
+                PopoverManager.setPopoverAnchorElement(hyperlinkElement);
                 PopoverManager.setPopoverContent(<LinkPopover
                     url={url}
                     onEditLink={()=>{
@@ -49,7 +50,6 @@ function onLinkClick(editorView, _pos, event){
                         PopoverManager.setPopoverAnchorElement(null);
                     }}
                 />);
-                PopoverManager.setPopoverAnchorElement(hyperlinkElement);
             }
         }
     }
