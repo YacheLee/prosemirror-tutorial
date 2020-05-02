@@ -4,7 +4,7 @@ import LinkPopover from './components/LinkPopover';
 import setLinkHref from './setLinkHref';
 import LinkEditPopover from './components/LinkEditPopover';
 import setLinkText from './setLinkText';
-import {className} from './config';
+import {className, DIALOG_ASK_URL} from './config';
 import getActiveLinkMark from './getActiveLinkMark';
 import PopoverManager from '../../PopoverManager';
 import {isMobileView} from './utils';
@@ -23,7 +23,7 @@ function onLinkClick(editorView, _pos, event){
                     url={url}
                     onEditLink={()=>{
                         if (isMobileView()) {
-                            const answered_url = window.prompt('Enter the URL of the link:', url);
+                            const answered_url = window.prompt(DIALOG_ASK_URL, url);
                             if (answered_url){
                                 setLinkHref(answered_url, mark.pos)(
                                     editorView.state,

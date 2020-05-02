@@ -88,7 +88,7 @@ const Button = styled.div`
     }
 `;
 
-function LinkEditPopover({text: _text="", url: _url="", onApply}){
+function LinkEditPopover({text: _text="", url: _url="", button_text="Apply", onApply}){
     const [text, setText] = useState(_text);
     const [url, setUrl] = useState(_url);
     const text_id = _.uniqueId('text_')
@@ -103,7 +103,7 @@ function LinkEditPopover({text: _text="", url: _url="", onApply}){
             <TextFieldContainer>
                 <Label htmlFor={link_id}>Link</Label>
                 <TextField id={link_id} value={url} onChange={e=>setUrl(e.target.value)} />
-                <Button onClick={()=>onApply({text, url})}>Apply</Button>
+                <Button onClick={()=>onApply({text, url})}>{button_text}</Button>
             </TextFieldContainer>
         </div>
     </Paper>
