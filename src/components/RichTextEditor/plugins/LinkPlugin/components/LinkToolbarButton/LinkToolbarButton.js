@@ -14,6 +14,16 @@ function getSelectedText(state, from, to) {
     return selectedFragment.content.map(e=>e.textContent).join("");
 }
 
+function getSelectedLink(state, pos) {
+    const node = state.doc.nodeAt(pos);
+    const linkMark = state.schema.marks.link;
+    const mark = linkMark.isInSet(node.marks);
+    if(mark && mark.attrs){
+        return mark.attrs.href;
+    }
+    return "";
+}
+
 function LinkToolbarButton({editorView, toolbarButtonDom}){
     return <ToolbarButtonStyle onClick={event => {
         event.preventDefault();
@@ -23,17 +33,19 @@ function LinkToolbarButton({editorView, toolbarButtonDom}){
             PopoverManager.closePopover();
         }
         else{
-            let text = "";
+            let text = "", url = "";
             const {from, to} = editorView.state.selection;
             const isInsertMode = from === to;
             if(!isInsertMode){
                 text = getSelectedText(editorView.state, from, to);
+                url = getSelectedLink(editorView.state, from);
             }
 
             PopoverManager.setPopoverAnchorElement(toolbarButtonDom);
             PopoverManager.setPopoverContent(
                 <LinkEditPopover
                     text={text}
+                    url={url}
                     onApply={({text, url}) => {
                     if(isInsertMode){
                         insertLink(from, url, text)(editorView.state, editorView.dispatch);
