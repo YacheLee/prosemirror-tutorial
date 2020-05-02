@@ -25,17 +25,31 @@ const Toolbar = styled.div`
   flex-shrink: 0;
 `;
 
+let anchorEl = null;
 export let setPopoverAnchorElement = null;
 export let setPopoverContent = null;
+
+export function closePopover(){
+    setPopoverAnchorElement(null);
+}
+
+export function getPopoverElement(){
+    return anchorEl;
+}
+
+export function isTopPopover(){
+    return anchorEl!==null;
+}
 
 function RichTextEditor({id, value}) {
     const editor = useRef(null);
     const toolbar = useRef(null);
     const [editorView, setEditorView] = useState(null);
-    const [anchorEl, _setAnchorEl] = useState(null);
+    const [_anchorEl, _setAnchorEl] = useState(null);
     const [popoverContent, _setPopoverContent] = useState(null);
     setPopoverAnchorElement = _setAnchorEl;
     setPopoverContent = _setPopoverContent;
+    anchorEl = _anchorEl;
 
     const init = useCallback(()=>{
         if(!editorView){
