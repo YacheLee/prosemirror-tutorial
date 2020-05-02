@@ -18,7 +18,7 @@ const Root = styled(CenterBox)`
   }
 `;
 
-function HeadingButton({value, onClick}) {
+function HeadingToolbarButton({value, onClick}) {
     const label = getLabel(value);
 
     return (
@@ -31,8 +31,8 @@ function HeadingButton({value, onClick}) {
     );
 }
 
-HeadingButton.defaultProps = {};
+HeadingToolbarButton.defaultProps = {};
 
-HeadingButton.propTypes = {};
+HeadingToolbarButton.propTypes = {};
 
-export default HeadingButton;
+export default HeadingToolbarButton;

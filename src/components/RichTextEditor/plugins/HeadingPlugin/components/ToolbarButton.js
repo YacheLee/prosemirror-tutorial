@@ -1,6 +1,6 @@
 import React from 'react';
 import Popover from '@material-ui/core/Popover';
-import HeadingButton from './HeadingButton';
+import HeadingToolbarButton from './HeadingToolbarButton';
 import ToolbarButtonStyle from '../../shared/ToolbarButtonStyle';
 import HeadingList from './HeadingList';
 import onHeadingClick from '../onHeadingClick';
@@ -11,7 +11,7 @@ function ToolbarButton({editorView, value}){
     const id = open ? 'heading-popover' : undefined;
 
     return <ToolbarButtonStyle style={{marginRight: 0}}>
-        <HeadingButton
+        <HeadingToolbarButton
             value={value}
             onClick={({ currentTarget }) => {
                 setAnchorEl(currentTarget);
